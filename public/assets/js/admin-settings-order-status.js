@@ -8,7 +8,7 @@ $("#orderStatusTable").DataTable({
         processing:
             '<i class="spinner-border"></i><span class="sr-only">Loading...</span> ',
     },
-    ajax: "/order-statuses/lists",
+    ajax: "/admin/settings/lists",
     columns: [
         { data: "order_status_id", name: "order_status_id" },
         { data: "order_status_name", name: "order_status_name" },
@@ -50,7 +50,7 @@ $(document).ready(function () {
         $.ajax({
             dataType: "json",
             type: "POST",
-            url: "/order-status",
+            url: "/admin/settings/order-status",
             data: new FormData(this),
             dataType: "JSON",
             contentType: false,
@@ -151,7 +151,7 @@ $("#editOrderStatusForm").submit(function (e) {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: `/order-statuses/update/${orderStatusDataId}`,
+        url: `/admin/settings/update/${orderStatusDataId}`,
         data: data,
         method: "PUT",
         success: function (response) {
@@ -207,8 +207,6 @@ $(function () {
 //delete
 $(document).on("click", "#delete", function () {
     let id = $(this).attr("value");
-    let url = `/order-statuses/destroy/`;
-    let dltUrl = url + id;
     swal({
         title: "Are you sure you want to delete?",
         text: "Once deleted, you will not be able to recover this record!",
@@ -223,7 +221,7 @@ $(document).on("click", "#delete", function () {
                         "content"
                     ),
                 },
-                url: dltUrl,
+                url: `/admin/settings/destroy/${id}`,
                 type: "DELETE",
                 cache: false,
                 success: function (dataResult) {

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use App\CustomerOrder;
 class AdminController extends Controller
 {
     /**
@@ -13,7 +14,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $dt = Carbon::now()->toDateString();
+        $totalIncomeToday = CustomerOrder::where('customer_order_date', $dt)->get()->sum('customer_order_total');;
+        $orderCount = CustomerOrder::select('customer_order_id', 'customer_order_status')->where('customer_order_status', '!=', '4')->count();
+        return view('admin.index',  compact('orderCount', 'totalIncomeToday', 'dt'));
     }
 
     public function __construct()

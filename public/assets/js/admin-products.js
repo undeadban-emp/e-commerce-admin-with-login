@@ -11,7 +11,7 @@ $("#productTable").DataTable({
         processing:
             '<i class="spinner-border"></i><span class="sr-only">Loading...</span> ',
     },
-    ajax: "/products-list",
+    ajax: "/admin/product/products-list",
     columns: [
         {
             data: "image",
@@ -102,7 +102,7 @@ $(document).ready(function () {
         $.ajax({
             dataType: "json",
             type: "POST",
-            url: "/product",
+            url: "/admin/product",
             data: new FormData(this),
             dataType: "JSON",
             contentType: false,
@@ -231,7 +231,7 @@ $("#editProductForm").submit(function (e) {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: `/product/update/${productDataId}`,
+        url: `/admin/product/update/${productDataId}`,
         data: data,
         cache: false,
         method: "PUT",
@@ -277,5 +277,72 @@ $("#editProductForm").submit(function (e) {
                 $("#editSave").removeClass("d-none");
             }
         },
+    });
+});
+
+$(document).on("click", ".delete", function () {
+    let id = $(this).attr("value");
+    swal({
+        title: "Are you sure you want to delete?",
+        text: "Once deleted, you will not be able to recover this record!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                url: `/admin/product/destroy/${id}`,
+                type: "DELETE",
+                cache: false,
+                success: function (dataResult) {
+                    var dataResult = JSON.parse(dataResult);
+                    if (dataResult.statusCode == 200) {
+                        let message = "Successfully Deleted";
+                        let type = "success";
+                        let duration = "10000";
+                        let positionX = "right";
+                        let ripple = "checked";
+                        let dismissible = "checked";
+                        let positionY = "top";
+                        window.notyf.open({
+                            type,
+                            message,
+                            duration,
+                            ripple,
+                            dismissible,
+                            position: {
+                                x: positionX,
+                                y: positionY,
+                            },
+                        });
+                        $("#productTable").DataTable().ajax.reload();
+                    }
+                },
+            });
+        } else {
+            let message = "Delete Cancelled";
+            let type = "danger";
+            let duration = "10000";
+            let positionX = "right";
+            let ripple = "checked";
+            let dismissible = "checked";
+            let positionY = "top";
+            window.notyf.open({
+                type,
+                message,
+                duration,
+                ripple,
+                dismissible,
+                position: {
+                    x: positionX,
+                    y: positionY,
+                },
+            });
+        }
     });
 });

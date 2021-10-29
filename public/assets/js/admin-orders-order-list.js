@@ -8,7 +8,7 @@ $("#customerOrderListTablePending").DataTable({
         processing:
             '<i class="spinner-border"></i><span class="sr-only">Loading...</span> ',
     },
-    ajax: "/orders/lists",
+    ajax: "/admin/orders/lists",
     columns: [
         { data: "customer_order_id", name: "customer_order_id" },
         {
@@ -48,7 +48,7 @@ $("#customerOrderListTableOnProcess").DataTable({
         processing:
             '<i class="spinner-border"></i><span class="sr-only">Loading...</span> ',
     },
-    ajax: "/orders/listss",
+    ajax: "/admin/orders/listss",
     columns: [
         { data: "customer_order_id", name: "customer_order_id" },
         {
@@ -88,7 +88,7 @@ $("#customerOrderListTableForDelivery").DataTable({
         processing:
             '<i class="spinner-border"></i><span class="sr-only">Loading...</span> ',
     },
-    ajax: "/orders/listsss",
+    ajax: "/admin/orders/listsss",
     columns: [
         { data: "customer_order_id", name: "customer_order_id" },
         {
@@ -180,7 +180,7 @@ $(document).on("click", "#savePending", function (row) {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: `/orders/product/update/${productData}`,
+        url: `/admin/orders/product/update/${productData}`,
         data: { data: orderStatusesPending },
         cache: false,
         method: "PUT",
@@ -240,7 +240,7 @@ $(document).on("click", "#saveOnProcess", function (row) {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: `/orders/product/update/${productData}`,
+        url: `/admin/orders/product/update/${productData}`,
         data: { data: orderStatusesOnProcess },
         cache: false,
         method: "PUT",
@@ -300,7 +300,7 @@ $(document).on("click", "#saveForDelivery", function (row) {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: `/orders/product/update/completed/${productData}`,
+        url: `/admin/orders/product/update/completed/${productData}`,
         data: { data: orderStatusesForDelivery },
         cache: false,
         method: "PUT",

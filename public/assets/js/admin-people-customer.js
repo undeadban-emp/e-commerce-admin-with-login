@@ -9,7 +9,7 @@ $(document).ready(function () {
             processing:
                 '<i class="spinner-border"></i><span class="sr-only">Loading...</span> ',
         },
-        ajax: "/customers/lists/",
+        ajax: "/admin/peoples/lists/",
         columns: [
             {
                 data: "customer_name",
@@ -59,7 +59,7 @@ $(document).ready(function () {
                     processing:
                         '<i class="spinner-border"></i><span class="sr-only">Loading...</span> ',
                 },
-                ajax: "/customers/lists",
+                ajax: "/admin/peoples/lists",
                 columns: [
                     {
                         data: "customer_name",
@@ -107,7 +107,7 @@ $(document).ready(function () {
                     processing:
                         '<i class="spinner-border"></i><span class="sr-only">Loading...</span> ',
                 },
-                ajax: `/api/customers/lists/${e.target.value}`,
+                ajax: `/api/peoples/customers/lists/${e.target.value}`,
                 columns: [
                     {
                         data: "customer_name",
@@ -201,7 +201,7 @@ $("#editCustomerForm").submit(function (e) {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: `/customers/update/${customerDataID}`,
+        url: `/admin/peoples/update/${customerDataID}`,
         data: data,
         cache: false,
         method: "PUT",
@@ -252,7 +252,7 @@ $("#editCustomerForm").submit(function (e) {
 
 $(document).on("click", "#delete", function () {
     let id = $(this).attr("value");
-    let url = `/customers/destroy/`;
+    let url = `/admin/peoples/destroy/`;
     let dltUrl = url + id;
     swal({
         title: "Are you sure you want to delete?",

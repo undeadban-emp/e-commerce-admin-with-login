@@ -8,7 +8,7 @@ $("#categoryTable").DataTable({
         processing:
             '<i class="spinner-border"></i><span class="sr-only">Loading...</span> ',
     },
-    ajax: "/category/lists",
+    ajax: "/admin/setting/lists",
     columns: [
         {
             data: "product_category_name",
@@ -97,7 +97,7 @@ $(document).ready(function () {
         $.ajax({
             dataType: "json",
             type: "POST",
-            url: "/category-list",
+            url: "/admin/setting/category-list",
             data: new FormData(this),
             dataType: "JSON",
             contentType: false,
@@ -193,7 +193,7 @@ $("#editProductForm").submit(function (e) {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
 
-        url: `/category/update/${categoryDataId}`,
+        url: `/admin/setting/update/${categoryDataId}`,
         data: data,
         method: "PUT",
         success: function (response) {
@@ -251,7 +251,7 @@ $(function () {
 //delete
 $(document).on("click", "#delete", function () {
     let id = $(this).attr("value");
-    let url = `/category/destroy/`;
+    let url = `/admin/setting/destroy/`;
     let dltUrl = url + id;
     swal({
         title: "Are you sure you want to delete?",

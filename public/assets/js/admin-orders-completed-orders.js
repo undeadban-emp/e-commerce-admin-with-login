@@ -8,7 +8,7 @@ $("#customerOrderCompletedOrders").DataTable({
         processing:
             '<i class="spinner-border"></i><span class="sr-only">Loading...</span> ',
     },
-    ajax: "/complete-order/lists",
+    ajax: "/admin/order/lists",
     columns: [
         { data: "customer_order_id", name: "customer_order_id" },
         {

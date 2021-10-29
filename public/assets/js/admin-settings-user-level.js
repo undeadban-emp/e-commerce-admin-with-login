@@ -8,7 +8,7 @@ $("#userLevelTable").DataTable({
         processing:
             '<i class="spinner-border"></i><span class="sr-only">Loading...</span> ',
     },
-    ajax: "/user-levels/lists",
+    ajax: "/admin/settingsss/lists",
     columns: [
         { data: "user_level_id", name: "user_level_id" },
         { data: "user_level_name", name: "user_level_name" },
@@ -48,7 +48,7 @@ $(document).ready(function () {
         $.ajax({
             dataType: "json",
             type: "POST",
-            url: "/user-level",
+            url: "/admin/settingsss/user-level",
             data: new FormData(this),
             dataType: "JSON",
             contentType: false,
@@ -147,7 +147,7 @@ $("#editUserLevelForm").submit(function (e) {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: `/user-levels/update/${userLevelDataID}`,
+        url: `/admin/settingsss/update/${userLevelDataID}`,
         data: data,
         method: "PUT",
         success: function (response) {
@@ -204,7 +204,7 @@ $(function () {
 //delete
 $(document).on("click", "#delete", function () {
     let id = $(this).attr("value");
-    let url = `/user-levels/destroy/`;
+    let url = `/admin/settingsss/destroy/`;
     let dltUrl = url + id;
     swal({
         title: "Are you sure you want to delete?",
